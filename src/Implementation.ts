@@ -10,27 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-class CppImplementation 
-{
-	prototype: string;
-	body: string;
-	methodName: string;
-	parameters: string;
-	isConstructor: boolean;
+class CppImplementation {
+    prototype: string;
+    body: string;
+    methodName: string;
+    parameters: string;
+    isConstructor: boolean;
 
 
-	constructor(prototype: string, body: string, methodName: string, parameters: string, isConstructor: boolean)
-	{
-		this.isConstructor = isConstructor;
-		this.prototype = prototype;
-		this.body = body;
-		this.methodName = methodName;
-		this.parameters = parameters;
-	}
+    constructor(prototype: string, body: string, methodName: string, parameters: string, isConstructor: boolean) {
+        this.isConstructor = isConstructor;
+        this.prototype = prototype;
+        this.body = body;
+        this.methodName = methodName;
+        this.parameters = parameters;
+    }
 
-	public implements(): string
-	{
-		return (this.prototype + "\n{\n" + this.body + "\n}");
-	}
+    public implements(): string {
+        return (this.prototype + "\n{\n" + this.body + "\n}");
+    }
 }
 export default CppImplementation;

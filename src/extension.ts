@@ -16,16 +16,16 @@ import * as vscode from 'vscode';
 import CppWatcher from './CppWatcher';
 import CppImplementer from './CppImplementer';
 
-const watcher : CppWatcher = new CppWatcher();
+const watcher: CppWatcher = new CppWatcher();
 
 export function activate(context: vscode.ExtensionContext) {
 
-	let disposable = vscode.commands.registerCommand('cpp-skeleton.addMissingMethods', CppImplementer.implementsMissingMethods);
-	let disposable2 = vscode.commands.registerCommand('cpp-skeleton.clearAsNewSkeleton', CppImplementer.clearAsNewSkeleton);
+    let disposable = vscode.commands.registerCommand('cpp-skeleton.addMissingMethods', CppImplementer.implementsMissingMethods);
+    let disposable2 = vscode.commands.registerCommand('cpp-skeleton.clearAsNewSkeleton', CppImplementer.clearAsNewSkeleton);
 
-	context.subscriptions.push(disposable);
-	context.subscriptions.push(disposable2);
-	
+    context.subscriptions.push(disposable);
+    context.subscriptions.push(disposable2);
+
 }
 
-export function deactivate() {}
+export function deactivate() { }

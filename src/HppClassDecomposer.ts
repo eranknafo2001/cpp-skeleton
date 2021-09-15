@@ -12,43 +12,39 @@
 
 import * as vscode from 'vscode'
 
-class HppClassDecomposer
-{
-	public text: string;
-	public top: string;
-	public innerClass: string;
-	public bottom: string;
-	// public publicPart: string;
-	// public privatePart: string;
-	public success: boolean;
+class HppClassDecomposer {
+    public text: string;
+    public top: string;
+    public innerClass: string;
+    public bottom: string;
+    // public publicPart: string;
+    // public privatePart: string;
+    public success: boolean;
 
-	constructor(document: vscode.TextDocument)
-	{
-		this.text = document.getText();
-		
-		const regex : RegExp =  new RegExp(/^([^]*)class[^]*{([^]*)};([^]*)$/, 'g');
-		const array: RegExpExecArray | null = regex.exec(document.getText());
-		if (array == null)
-		{
-			this.top = "";
-			this.innerClass = "";
-			// this.publicPart = "";
-			// this.privatePart = "";
-			this.bottom = "";
-			this.text = "";
-			this.success = false;
-		}
-		else
-		{
-			this.text = array[0];
-			this.top = array[1];
-			this.innerClass = array[2];
-			// this.publicPart = array[3];
-			// this.privatePart = array[4];
-			this.bottom = array[3];
-			this.success = true;
-		}
-	}
+    constructor(document: vscode.TextDocument) {
+        this.text = document.getText();
+
+        const regex: RegExp = new RegExp(/^([^]*)class[^]*{([^]*)};([^]*)$/, 'g');
+        const array: RegExpExecArray | null = regex.exec(document.getText());
+        if (array == null) {
+            this.top = "";
+            this.innerClass = "";
+            // this.publicPart = "";
+            // this.privatePart = "";
+            this.bottom = "";
+            this.text = "";
+            this.success = false;
+        }
+        else {
+            this.text = array[0];
+            this.top = array[1];
+            this.innerClass = array[2];
+            // this.publicPart = array[3];
+            // this.privatePart = array[4];
+            this.bottom = array[3];
+            this.success = true;
+        }
+    }
 
 }
 
