@@ -9,7 +9,7 @@ class CppWatcher {
     public fileSystemWatcher?: vscode.FileSystemWatcher;
 
     startWatch() {
-        this.fileSystemWatcher = vscode.workspace.createFileSystemWatcher("**" + path.sep + "{[A-Z],[a-z]}*.cpp",
+        this.fileSystemWatcher = vscode.workspace.createFileSystemWatcher("**/{[A-Z],[a-z]}*.cpp",
             false, true, true);
         this.fileSystemWatcher.onDidCreate(this.onCreateCpp);
     }
