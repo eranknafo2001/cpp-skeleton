@@ -21,7 +21,7 @@ class CppWatcher {
 
 	constructor()
 	{
-		this.fileSystemWatcher = vscode.workspace.createFileSystemWatcher("**/[A-Z]{[A-Z],[a-z]}*.cpp",
+		this.fileSystemWatcher = vscode.workspace.createFileSystemWatcher("**/{[A-Z],[a-z]}*.cpp",
 			false, true, true);
 		this.fileSystemWatcher.onDidCreate(this.onCreateCpp);
 	}
@@ -34,8 +34,7 @@ class CppWatcher {
 		if (!rel || ! rel.length)
 			rel = ".";
 		if (vscode.window.activeTextEditor)
-		{		const res : string = path.normalize(path.dirname(vscode.window.activeTextEditor.document.fileName)
-			+ "/" + rel + "/" + path.basename(vscode.window.activeTextEditor.document.fileName).replace(/\.cpp/, ".hpp"));
+		{		const res : string = path.normalize(path.join(path.dirname(vscode.window.activeTextEditor.document.fileName) , rel , path.basename(vscode.window.activeTextEditor.document.fileName).replace(/\.cpp/, ".hpp")));
 			return res;
 		}
 		else

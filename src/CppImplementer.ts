@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 import * as vscode from 'vscode';
+import * as path from 'path';
 import HppClassDecomposer from './HppClassDecomposer';
 import CppImplementation from './Implementation';
 import CppWatcher from './CppWatcher';
@@ -41,7 +42,7 @@ class CppImplementer
 				const pos: vscode.Position = this.editor.selection.active;
 				edit.insert(pos,
 					[
-						"#include \""+ this.hppDoc.fileName.split("/").pop() as string +"\"",
+						"#include \""+ path.basename(this.hppDoc.fileName) as string +"\"",
 						(<CppImplementation[]> ImplementationsArray).map(
 							implementation => implementation.implements()).join("\n\n")
 					].join("\n\n"));
@@ -126,7 +127,7 @@ class CppImplementer
 			const Functionregex = RegExp(/^(\t| )*(static)?(\t| )*(const)?(\t| )*(virtual)?(\t| )*(([A-Za-z_:\-~]*)((\t| )*(\&|\*))?)(\t| )*(([A-Za-z_0-9\<\>!\*=\+\/\-~]*)\((.*)\)([^=\n])*);(\t| )*$/, 'gm');
 			let array: RegExpExecArray | null;
 			var implementations: CppImplementation[] = [];
-			const className : string = (this.editor.document.fileName.split("/").pop() as string).split(".")[0];
+			const className : string = path.basename(this.editor.document.fileName, ".cpp");
 			while ((array = Functionregex.exec(decomposer.innerClass)))
 			{
 				// console.log(array);
@@ -199,7 +200,7 @@ class CppImplementer
 	public static implementsMissingMethods()
 	{
 		if (vscode.window.activeTextEditor
-			&& vscode.window.activeTextEditor.document.fileName.split(".").slice(-1)[0] == "cpp")
+			&& path.extname(vscode.window.activeTextEditor.document.fileName).substr(1) == "cpp")
 		{
 			let editor = vscode.window.activeTextEditor as vscode.TextEditor;
 			const matchinHppFileName : string = <string>CppWatcher.getHppRelativePath();
@@ -219,7 +220,7 @@ class CppImplementer
 	public static clearAsNewSkeleton()
 	{
 		if (vscode.window.activeTextEditor
-			&& vscode.window.activeTextEditor.document.fileName.split(".").slice(-1)[0] == "cpp")
+			&& path.extname(vscode.window.activeTextEditor.document.fileName).substr(1) == "cpp")
 		{
 			let editor = vscode.window.activeTextEditor as vscode.TextEditor;
 			
